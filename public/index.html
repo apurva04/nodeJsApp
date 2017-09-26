@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Get the data</title>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="ctrl">
+            <h1>{{test}}</h1>
+
+
+    </div>
+    
+    <script>
+        var app=angular.module('myApp',[]);
+        app.controller('ctrl',function($scope,$http){
+            $scope.test="its working";
+            $scope.detail={};
+            $http.get('/fetchdata').then(
+                function(success){
+                    console.log(success);
+
+
+                },
+                function(error){
+
+                }
+            );
+
+
+        });
+
+    </script>
+</body>
+
+</html>

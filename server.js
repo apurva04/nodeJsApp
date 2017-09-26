@@ -1,29 +1,35 @@
-var express=require(express);
+var express=require('express');
 var app=express();
-// var sql = require("mssql");
-app.get('/',function(req,res){
-
+//app.use(express.static(__dirname+"/public"));
+app.get('/fetchdata',function(req,res){
+    var  sql= require('mssql');
+    
     var config={
-        user:"",
-        password:"",
-        server:"",
-        database:"",
+        user:'pmanshani',
+        password:'Password@123',
+        server:'localhost',
+        database:'test',
+        porrt:5000,
+        
     };
-
-    // sql.Connect(config,function(err){
-    //     if(err) console.log(err);
-
-    //     var request=new sql.request();
-    //     request.query('select * from Student',function(err,record){
-    //         if(err) console.log(err);
-
-    //         res.send(record);
-
-    //     });
-
-    // });
+   
+    console.log("i am in server");
 
 
+    sql.connect(config,function(err){
+        if(err) console.log(err);
+
+        var request=new sql.request();
+        request.query('select * from abc',function(err,record){
+            if(err) console.log(err);
+
+            res.send(record);
+
+        });
+
+    });
+
+    sql.close();
 });
 var server = app.listen(5000, function () {
     console.log('Server is running..');
