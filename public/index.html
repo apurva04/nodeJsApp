@@ -8,8 +8,14 @@
 </head>
 
 <body ng-app="myApp">
-    <div ng-controller="ctrl">
+    <div ng-controller="ctrl" class="container">
             <h1>{{test}}</h1>
+            <li ng-repeat="name in detail">
+                <ui>
+                    {{name}}
+                </ui>
+            </li>
+
 
 
     </div>
@@ -18,10 +24,16 @@
         var app=angular.module('myApp',[]);
         app.controller('ctrl',function($scope,$http){
             $scope.test="its working";
-            $scope.detail={};
+            $scope.detail=[];
             $http.get('/fetchdata').then(
                 function(success){
                     console.log(success);
+                    var length=success.data.recordset.length;
+                    for(var i=0;i<length;i++){
+                        $scope.detail.push(success.data.recordset[i].name);
+
+                    }
+
 
 
                 },

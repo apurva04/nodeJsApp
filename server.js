@@ -16,7 +16,7 @@ app.get('/fetchdata', function (req, res) {
 
     console.log("i am in server");
 
-    
+
     var conn = new sql.ConnectionPool(config);
     conn.connect().then(function () {
         var request = new sql.Request(conn);
@@ -27,12 +27,14 @@ app.get('/fetchdata', function (req, res) {
         }).catch(function (err) {
             console.log(err);
             conn.close();
+
+
             res.send(err);
         });
     }).catch(function (err) {
         console.log(err);
     });
-   
+
 });
 var server = app.listen(3000, function () {
     console.log('Server is running..');
